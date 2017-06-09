@@ -46,5 +46,26 @@ namespace Extension.TN.String
             var intersectedItems = first.Intersect(second, StringComparer.OrdinalIgnoreCase);
             return string.Join(", ", intersectedItems);
         }
+
+        public static string Eliminate(this string root, string elimination)
+        {
+            if (string.IsNullOrWhiteSpace(root))
+            {
+                return string.Empty;
+            }
+            else if (string.IsNullOrWhiteSpace(elimination))
+            {
+                return root;
+            }
+            else
+            {
+                var rootItems = root.Split(',');
+                var elinimatedItems = elimination.Split(',');
+                var result = from x in rootItems
+                             where !elinimatedItems.Contains(x)
+                             select x;
+                return string.Join(",", result);
+            }
+        }
     }
 }

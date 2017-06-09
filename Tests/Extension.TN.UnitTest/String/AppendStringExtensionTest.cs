@@ -36,5 +36,21 @@ namespace Extension.TN.UnitTest.String
             // Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestCase(null, null, "")]
+        [TestCase("456", null, "456")]
+        [TestCase("", "abc", "")]
+        [TestCase("1,2,3", "", "1,2,3")]
+        [TestCase("1,2,3", "4,5", "1,2,3")]
+        [TestCase("1,2,3,4", "4,5,2", "1,3")]
+        public void Eliminate_InputEliminationText_ReturnRootAfterElimination(string root, string elimination, string expected)
+        {
+            // Arrange
+            // Act
+            var actual = root.Eliminate(elimination);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
